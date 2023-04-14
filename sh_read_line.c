@@ -20,12 +20,13 @@ char *sh_read_line()
 	while (1)
 	{
 		c = getchar();
-		if (c == EOF || c ||'\0')
+		if (c == EOF || c == '\0')
 		{
 			cuffer[position] = '\0';
-			return (buffer)
+			return (buffer);
 		}
-		else {
+		else
+		{
 			buffer[position] = c;
 		}
 		position++;
