@@ -10,7 +10,8 @@
  */
 char **sh_split_line(char *line)
 {
-	int buf_size = TOK_BUFSIZE;
+	int bufsize = TOK_BUFSIZE;
+	int position = 0;
 	char *token;
 	char **tokens;
 
@@ -19,21 +20,12 @@ char **sh_split_line(char *line)
 	{
 		exit(EXIT_FAILURE);
 	}
-	token = sh_strtok(line, TOK_DELIM);
+	token = strtok(line, TOK_DELIM);
 	while (token != NULL)
 	{
 		tokens[position] = token;
 		position++;
-		if (position >= bufsize)
-		{
-			bufsize *= 2;
-			tokens = realloc(tokens, bufsize * sizeof(char *));
-			if (tokens == NULL)
-			{
-				exit(EXIT_FAILURE);
-			}
-		}
-		token = sh_strtok(NULL, TOK_DELIM);
+		token = strtok(NULL, TOK_DELIM);
 	}
 	tokens[position] = NULL;
 
