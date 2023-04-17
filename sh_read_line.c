@@ -1,43 +1,31 @@
 #include "sh_shell.h"
 
 /**
- * sh_read_line - read line and store it in allocated memory block,
- * and if it esceeeds it reallocate more space
+ * fget - reads input
+ * @s: array to store read characters
+ * @n: number of arguments
+ * @stream: where input comes from
  *
- * Return: buffer if successful
+ * Return: read input or NULL if it fails
  */
-char *sh_read_line()
+char* fget(char* str, int n, FILE* stream)
 {
-	int bufsize = 1024;
-	int position = 0;
-	char *buffer = malloc(sizeof(char) * bufsize);
 	int c;
+	char* ptr = str;
 
-	if (buffer == NULL)
+	while (--n > 0 && (c = getc(stream)) != EOF)
 	{
-		perror("Error:");
+		*ptr++ = c;
+		if (c == '\n')
+			break;
 	}
-	while (1)
+	*ptr = '\0';
+	if (ptr == str || c == EOF)
 	{
-		c = getchar();
-		if (c == EOF || c == '\0')
-		{
-			cuffer[position] = '\0';
-			return (buffer);
-		}
-		else
-		{
-			buffer[position] = c;
-		}
-		position++;
-		if (position >= bufsize)
-		{
-			bufsize *= 2;
-			buffer = realloc(buffer, bufsize);
-			if (buffer != NULL)
-			{
-				exit(EXIT_FAILURE);
-			}
-		}
+		return NULL;
+	}
+	else
+	{
+		return str;
 	}
 }
