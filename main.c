@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "sh_shell.h"
 
 /**
  * main - load config lines, if any and perform any clean up
@@ -7,21 +7,21 @@
  *
  * Return: 0 if successful
  */
-int main(int argc, char **argv)
+int main(__attribute__((unused))int argc, __attribute__((unused))char **argv)
 {
-	char *line;
+	char *line = malloc(1024 * sizeof(char *));
 	char **args;
-	int status;
 
-	do {
-		printf("$ ");
-		line = sh_read_line();
+	while (1)
+	{
+		printf("#cisfun$ ");
+		fget(line, 1024, stdin);
 		args = sh_split_line(line);
-		status = sh_execute(args);
+		sh_launch(args);
 
 		free(line);
 		free(args);
-	} while (status);
+	}
 
 	return (0);
 }
