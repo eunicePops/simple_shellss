@@ -1,27 +1,24 @@
-#include "sh_shell.h"
-
-/**
- * main - load config lines, if any and perform any clean up
- * @argc: argument count
- * @argv: argument vector
- *
- * Return: 0 if successful
- */
-int main(__attribute__((unused))int argc, __attribute__((unused))char **argv)
-{
-	char *line = malloc(1024 * sizeof(char *));
-	char **args;
-
-	while (1)
-	{
-		printf("#cisfun$ ");
-		fget(line, 1024, stdin);
-		args = sh_split_line(line);
-		sh_launch(args);
-
-		free(line);
-		free(args);
+#include "main.h"
+int main() {
+	int i;
+	char* command = (char*) malloc(MAX_COMMAND_LENGTH * sizeof(char));
+	char** arguments = (char**) malloc(MAX_ARGUMENTS * sizeof(char*));
+	for(i = 0; i < MAX_ARGUMENTS; i++) {
+		arguments[i] = (char*) malloc(MAX_COMMAND_LENGTH * sizeof(char));
 	}
 
-	return (0);
+	while(1) {
+		printf("#cisfun$ ");
+		fget(command, MAX_COMMAND_LENGTH, stdin);
+		parse_command(command, arguments);
+		execute(arguments);
+	}
+
+	free(command);
+	for(i = 0; i < MAX_ARGUMENTS; i++) {
+		free(arguments[i]);
+	}
+	free(arguments);
+
+	return 0;
 }
