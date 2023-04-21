@@ -1,48 +1,34 @@
 #include "main.h"
 
-char *builtin_str[] = {
-	"cd",
-	"help",
-	"exit",
-	"env"
-};
+int (*get_function(char *s))(char **args)
+{
+	builtin builtin_list[] = {
+		{"cd", sh_cd},
+		{"help", sh_help},
+		{"exit",sh_exit},
+		{"env", env},
+		{NULL, NULL}
+	};
+	int i = 0;
 
-int (*builtin_func[]) (char **) = {
-	&sh_cd,
-	&sh_help,
-	&sh_exit,
-	&env
-};
+	while (builtin_list[i].builtin_str != NULL && strcmp(s, builtin_list[i].builtin_str) != 0)
+	{
+		i++;
+	}
+
+	return (builtin_list[i].builtin_func);
+}
 
 int execute(char **args)
 {
-	int i;
-
-	if (args[0] == NULL) {
-		return 1;
+	if (args[0] == NULL)
+	{
+		return (1);
 	}
-		for (i = 0; i < num_builtins(); i++) {
-		    if (strcmp(args[0], builtin_str[i]) == 0) {
-			return (*builtin_func[i])(args);
-		}
-	}
-	return launch(args);
-}
-
-int num_builtins() {
-	return sizeof(builtin_str) / sizeof(char *);
-}
-
-int sh_help(__attribute__((unused))char **args)
-{
-	int i;
-	printf("Type program names and arguments, and hit enter.\n");
-	printf("The following are built in:\n");
-
-	for (i = 0; i < num_builtins(); i++) {
-		printf("  %s\n", builtin_str[i]);
+	if (get_function(args[0]) == NULL)
+	{
+		return (launch(args));
 	}
 
-	printf("Use the man command for information on other programs.\n");
-	return 1;
+	return (get_function(args[0])(args));
 }
