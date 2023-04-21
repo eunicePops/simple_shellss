@@ -15,5 +15,6 @@ int launch(char** arguments) {
 	} else {
 		wait(NULL);
 	}
+
 	return (1);
 }

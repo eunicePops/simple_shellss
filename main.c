@@ -1,8 +1,10 @@
 #include "main.h"
+
 int main() {
 	int i;
 	char* command = (char*) malloc(MAX_COMMAND_LENGTH * sizeof(char));
 	char** arguments = (char**) malloc(MAX_ARGUMENTS * sizeof(char*));
+
 	for(i = 0; i < MAX_ARGUMENTS; i++) {
 		arguments[i] = (char*) malloc(MAX_COMMAND_LENGTH * sizeof(char));
 	}

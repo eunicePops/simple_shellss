@@ -1,8 +1,10 @@
 #include "main.h"
+
 char* fget(char* s, int n, FILE* stream)
 {
 	int c;
 	char* ptr = s;
+
 	while (--n > 0 && (c = getc(stream)) != EOF)
 	{
 		*ptr++ = c;
@@ -11,7 +13,11 @@ char* fget(char* s, int n, FILE* stream)
 	}
 	*ptr = '\0';
 	if (ptr == s || c == EOF)
-		return NULL;
+	{
+		return (NULL);
+	}
 	else
-		return s;
+	{
+		return (s);
+	}
 }
