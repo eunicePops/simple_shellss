@@ -17,11 +17,18 @@ void parse_command(char* command, char** arguments);
 int launch(char** arguments);
 int execute(char **args);
 
-int num_builtins();
+typedef struct builtin
+{
+	char *builtin_str;
+	int (*builtin_func)(char **);
+} builtin;
+
 
 int sh_cd(char **args);
 int sh_help(__attribute__((unused))char **args);
 int sh_exit(__attribute__((unused))char **args);
 int env(char **args);
+
+int (*get_function(char *s))(char **args);
 
 #endif
