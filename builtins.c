@@ -1,11 +1,8 @@
 #include "main.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-extern char **environ;
-
 int env(__attribute__((unused))char **args)
 {
+	extern char **environ;
 	char** env = environ;
 
 	while (*env != NULL) {
@@ -29,20 +26,20 @@ int sh_cd(char **args)
 	}
 	return (1);
 }
-/*
+
 int sh_help(__attribute__((unused))char **args)
 {
-	int i;
+/*	int i;*/
 
 	printf("Type program names and arguments and hit enter.\n");
 	printf("The following are built in commands:\n");
-	for (i = 0; i < num_builtins(); i++)
+/*	for (i = 0; i < num_builtins(); i++)
 	{
 		printf(" %s\n", builtin_str[i]);
 	}
-	return (1);
+*/	return (1);
 }
-*/
+
 int sh_exit(__attribute__((unused))char **args)
 {
 	exit(EXIT_SUCCESS);
