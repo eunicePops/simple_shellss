@@ -1,17 +1,17 @@
 #include "main.h"
 
-void parse_command(char* command, char** args)
+void parse_command(char *command, char **args)
 {
-	char* token;
+	char *token;
 	int i = 0;
 
 	token = strtok(command, TOK_DELIM);
-	while(token != NULL)
+	while (token != NULL)
 	{
-		arguments[i] = token;
+		args[i] = token;
 		token = strtok(NULL, TOK_DELIM);
 		i++;
 	}
-	arguments[i] = NULL;
+	args[i] = NULL;
 }
 

@@ -1,9 +1,9 @@
 #include "main.h"
 
-char* fget(char* s, int n, FILE* stream)
+char *fget(char *s, int n, FILE *stream)
 {
 	int c;
-	char* ptr = s;
+	char *ptr = s;
 
 	while (--n > 0 && (c = getc(stream)) != EOF)
 	{
