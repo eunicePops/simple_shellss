@@ -36,4 +36,9 @@ int sh_env(char **args);
 
 int (*get_function(char *s))(char **args);
 
+/* token.c */
+char **strtoks(char *, char *);
+char **strtoks2(char *, char);
+
+
 #endif
